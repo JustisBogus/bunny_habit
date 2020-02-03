@@ -1,0 +1,180 @@
+$shadow-outer: -6px -6px 26px 0 rgba(255,255,255,0.82), 
+    6px 6px 16px 0 rgba(217,210,200,0.52);
+$shadow-outer-hover: -3px -3px 26px 0 rgba(255,255,255,0.82), 
+    3px 3px 16px 0 rgba(217,210,200,0.52);
+$shadow-outer-pressed: inset -3px -3px 26px 0 rgba(255,255,255,0.82), 
+    inset 3px 3px 16px 0 rgba(217,210,200,0.52);
+$shadow-inner: inset -6px -6px 26px 0 rgba(255,255,255,0.82),
+    inset 6px 6px 16px 0 rgba(217,210,200,0.52);
+$shadow-inner-focus: inset -6px -6px 26px 0 rgba(255,255,255,1),
+    inset 6px 6px 16px 0 rgba(217,210,200,0.63);
+
+.main-contentContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow: auto;
+}
+
+.habitsContainer, .calendarContainer-calendarContainer {
+    width: 35%;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-right: 2px solid #fff;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    height: 100vh;
+    padding: 0px 0 350px 0;
+    margin: 100px 40px 0 40px;
+    box-shadow: $shadow-outer;
+}
+
+.habitsContainer-title {
+    font-size: 54px;
+    font-weight: 700;
+    color: #777;
+}
+
+.habitsContainer-habitsContainer {
+    width: 100%;
+}
+
+.habitsContainer-habitButtonContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.newHabit-newHabitContainer {
+    width: 100%;
+}
+
+.newHabit-inputContainer {
+    overflow: hidden;
+    width: 80%;
+    height: 100px;
+    margin: auto;
+    border-radius: 50px;
+}
+
+.newHabit-input {
+    border: none;
+    height: 100px;
+    width: 100%;
+    color: #555555;
+    background: none;
+    font-size: 36px;
+    font-weight: 700;
+    text-transform: lowercase;
+    padding-left: 40px;
+    box-shadow: $shadow-inner;
+    &:hover {
+        box-shadow: $shadow-inner-focus;
+        color: #777777;
+    }
+    &:focus {
+        box-shadow: $shadow-inner-focus;
+    }
+}
+
+.newHabit-buttonContainer {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.newHabitButton, .newHabitButton-check {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    color: #777;
+    font-size: 24px;
+    margin: 40px 5% 40px 5%;
+    border-radius: 25px;
+    box-shadow: $shadow-outer;
+    &:hover {
+        box-shadow: $shadow-outer-hover;
+    }
+}
+
+.newHabitButton-check {
+    color: #7bdf93;
+}
+
+.cancelButton {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    color: #e1306c;
+    font-size: 24px;
+    margin: 40px 5% 40px 5%;
+    border-radius: 25px;
+    box-shadow: $shadow-outer;
+    &:hover {
+        box-shadow: $shadow-outer-hover;
+    }
+}
+
+.habitButton1, .habitButton2, .habitButton3 {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 24px; 
+    margin: 40px 5% 0 5%;
+    border-radius: 50px;
+    color: #777;
+    box-shadow: $shadow-outer;
+    &:hover {
+        box-shadow: $shadow-outer-hover;
+        color: #7bdf93;
+    }
+    &:active {
+        box-shadow: $shadow-outer-hover;
+        color: #7bdf93;
+    }
+}
+
+//color: #e1306c;
+//color: #2f80ed;
+
+.habit-habitContainer, .habit-habitContainer-today, .habit-habitContainer-completed {
+    width: 80%;
+    height: 100px;
+    margin: 40px auto 40px auto;
+    border-radius: 25px;
+    line-height: 100px;
+    font-size: 36px;
+    font-weight: 700; 
+}
+
+.habit-habitContainer-today {
+    color: #7bdf93;
+    box-shadow: $shadow-outer;
+}
+
+.habit-habitContainer {
+    color: #777;
+    box-shadow: $shadow-outer;
+}
+
+.habit-habitContainer-completed {
+    color: #777;
+    box-shadow: $shadow-outer-pressed;
+}
+
+.habit-check, .habit-days {
+    margin-left: 10px;
+    position: absolute;
+    color: #7bdf93;
+    line-height: 80px;
+    font-size: 24px;
+}
+
+
+
+

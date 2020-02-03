@@ -1,0 +1,4 @@
+export const CLICK = 'CLICK';
+export const SHOW_NEW_HABIT = 'SHOW_NEW_HABIT';
+export const ADD_NEW_HABIT_INPUT = 'ADD_NEW_HABIT_INPUT';
+export const SHOW_NEW_HABIT_BUTTONS = 'SHOW_NEW_HABIT_BUTTONS';
