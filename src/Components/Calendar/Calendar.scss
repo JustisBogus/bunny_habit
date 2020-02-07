@@ -1,0 +1,119 @@
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+
+$shadow-outer: -6px -6px 26px 0 rgba(255,255,255,0.82), 
+    6px 6px 16px 0 rgba(217,210,200,0.52);
+$shadow-outer-hover: -3px -3px 26px 0 rgba(255,255,255,0.82), 
+    3px 3px 16px 0 rgba(217,210,200,0.52);
+$shadow-outer-pressed: inset -3px -3px 26px 0 rgba(255,255,255,0.82), 
+    inset 3px 3px 16px 0 rgba(217,210,200,0.52);
+$shadow-inner: inset -6px -6px 26px 0 rgba(255,255,255,0.82),
+    inset 6px 6px 16px 0 rgba(217,210,200,0.52);
+$shadow-inner-focus: inset -6px -6px 26px 0 rgba(255,255,255,1),
+    inset 6px 6px 16px 0 rgba(217,210,200,0.63);
+ 
+.fc {
+    text-align: left !important;
+    position: relative;
+}    
+
+.fc-toolbar > * > :not(:first-child) {
+    margin-left: none !important;
+}
+
+.fc-toolbar, .fc-header-toolbar {
+    margin-bottom: 110px !important;
+}
+    
+.fc-button-group {
+    width: 250px;
+    margin: auto !important;
+    display: block !important;
+    position: absolute !important;
+    top: 40px;
+    right: 25px;
+}
+
+.fc-left {
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 187px;
+    text-align: center;
+    font-size: 18px;
+    text-transform: lowercase;
+    color: #777;
+    opacity: 1;
+}
+
+.fc-right {
+    width: 100% !important;
+    position: relative;
+}
+
+.fc-button-primary:disabled {
+    background-color: #eee !important;
+    border: none;
+    opacity: 1;
+}
+
+.fc-today-button, .fc-prev-button, .fc-next-button, .fc-button, .fc-button-primary {
+    width: 100px !important;
+    height: 100px !important;
+    font-size: 24px !important;
+    margin: 0px 5% 40px 5% !important;
+    border-radius: 50px !important;
+    border: none !important;
+    background: #eee !important;
+    color: #777 !important;
+    box-shadow: $shadow-outer !important;
+    &:hover {
+        box-shadow: $shadow-outer-hover !important;
+        color: #7bdf93 !important;
+        text-align: center !important;
+        -webkit-animation: glowGreen 1s ease-in-out infinite alternate ;
+        -moz-animation: glowGreen 1s ease-in-out infinite alternate;
+        animation: glowGreen 1s ease-in-out infinite alternate;
+
+    }
+    &:active {
+        box-shadow: $shadow-outer-hover !important;
+        color: #7bdf93 !important;
+        text-align: center;
+        -webkit-animation: glowGreen 1s ease-in-out infinite alternate;
+        -moz-animation: glowGreen 1s ease-in-out infinite alternate;
+        animation: glowGreen 1s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes glowGreen {
+    from {
+      text-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93;
+    }
+    to {
+      text-shadow: 0 0 1px #fff, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93;
+    }
+}
+
+.fc-today-button {
+    margin: 40px 5% 40px 40px !important;
+}
+
+.fc-scroller, .fc-day-grid-container {
+    height: 100% !important;
+    overflow: auto !important;
+}
+
+.fc-today {
+    background: #f2f2f2 !important;
+    color: #7bdf93;
+    border-color: #ddd !important;
+}
+
+.fc-head {
+    color: #777;
+}
+
+.fc-day-grid {
+    color: #777;
+}

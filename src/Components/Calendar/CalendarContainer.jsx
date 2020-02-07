@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import '../Main.scss';
+import './Calendar.scss';
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
 import { connect } from 'react-redux';
 import { click } from '../../store/actions/habits';
 
@@ -14,8 +17,8 @@ class CalendarContainer extends Component {
     render() {
 
         return (
-            <div className="calendarContainer-calendarContainer">
-               Calendar Container
+            <div className="calendarContainer">
+               <FullCalendar defaultView="dayGridMonth" plugins={[ dayGridPlugin ]} />
             </div>
         );
     }

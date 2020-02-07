@@ -33,7 +33,12 @@ const reducer = (state = initialState, action) => {
         case actionTypes.SHOW_NEW_HABIT:
             return {
                 ...state,
-                     showNewHabit: action.showNewHabitInput
+                    showNewHabit: action.showNewHabitInput
+            };
+        case actionTypes.SET_HABIT_COMPLETED:
+            return {
+                ...state,
+                    habits: action.habit
             };
         default: 
             return state;

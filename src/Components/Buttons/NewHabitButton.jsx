@@ -6,7 +6,7 @@ const NewHabitButton = (props) =>  {
     const { x } = useSpring({ from: { x: 0 }, x: state ? 1 : 0, config: { duration: props.button.animationDuration } })
   return ( 
     <animated.div
-        className={props.button.id === 2 ? "newHabitButton-check" : "newHabitButton"}
+        className={props.button.id === 2 ? "newHabitButton-check glow-green" : "newHabitButton"}
       style={{
         opacity: x.interpolate({ range: [0, 1], output: [1, 1] }),
         transform: x

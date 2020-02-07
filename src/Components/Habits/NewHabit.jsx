@@ -39,6 +39,7 @@ class Habit extends Component {
         }
 
         return (
+           
             <div className="newHabit-newHabitContainer">
                 <div className="newHabit-inputContainer">
                     <input 

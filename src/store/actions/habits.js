@@ -1,4 +1,5 @@
-import { CLICK, SHOW_NEW_HABIT, ADD_NEW_HABIT_INPUT, SHOW_NEW_HABIT_BUTTONS } from './actionTypes';
+import { CLICK, SHOW_NEW_HABIT, ADD_NEW_HABIT_INPUT, SHOW_NEW_HABIT_BUTTONS,
+    SET_HABIT_COMPLETED } from './actionTypes';
 
 export const click = (buttonClicked) => {
     return {
@@ -25,5 +26,12 @@ export const showNewHabit = (showNewHabitInput) => {
     return {
         type: SHOW_NEW_HABIT,
         showNewHabitInput
+    };
+};
+
+export const setHabitCompleted = (habit) => {
+    return {
+        type: SET_HABIT_COMPLETED,
+        habit
     };
 };

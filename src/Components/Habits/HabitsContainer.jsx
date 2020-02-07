@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import '../Main.scss';
+import '../Transitions.scss';
 import NewHabit from './NewHabit';
 import HabitButton from '../Buttons/HabitButton';
 import Habit from './Habit';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
-import { click, showNewHabit } from '../../store/actions/habits';
+import { click, setHabitCompleted, showNewHabit } from '../../store/actions/habits';
 
 class HabitsContainer extends Component {
     
@@ -14,20 +16,31 @@ class HabitsContainer extends Component {
         } 
     }
 
+    handleHabitClick = (id, completed) => {
+        let habits = [...this.props.habits]
+        if(!completed) {
+            for (var i=0; i < habits.length; i++) {
+                if (habits[i].id===id) {
+                    habits[i].completed = true;
+                    this.props.onSetHabitCompleted(habits);
+                }
+            }
+        }
+    }
+
     render() {
 
         let newHabit;
 
         if (this.props.showNewHabit) {
-            newHabit = <div ref={this.newHabit}>
-            <NewHabit/>
-            </div>
+            newHabit = <NewHabit/>
         }
 
         let habits = this.props.habits.map(habit => {
             return <Habit
                 key={habit.id}
                 habit={habit}
+                onClick={this.handleHabitClick}
             />
         });
         
@@ -44,13 +57,18 @@ class HabitsContainer extends Component {
                 <div className="habitsContainer-habitButtonContainer">
                     {buttons}
                 </div>
-                {newHabit}
+                <ReactCSSTransitionGroup
+                    transitionName={"fade"}
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}>
+                    {newHabit}
+                </ReactCSSTransitionGroup>
                 <div className="habitsContainer-habitsContainer"> 
                     <div className="habitsContainer-title">
                         do
                     </div>
-                {habits}
-                </div>     
+                    {habits}           
+                </div> 
             </div>
         );
     }
@@ -68,6 +86,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onButtonClicked: (buttonClicked) => dispatch(click(buttonClicked)),
+        onSetHabitCompleted: (habit) => dispatch(setHabitCompleted(habit)),
         onShowNewHabit: (showNewHabitInput) => dispatch(showNewHabit(showNewHabitInput))
     }
 }

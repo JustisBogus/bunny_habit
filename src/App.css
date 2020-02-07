@@ -6,6 +6,11 @@ body {
   background: #eee;
 }
 
+button {
+  background: #eee;
+  border: none;
+}
+
 .App {
   text-align: center;
 }

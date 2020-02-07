@@ -8,7 +8,7 @@ const CancelButton = (props) =>  {
     const { x } = useSpring({ from: { x: 0 }, x: state ? 1 : 0, config: { duration: 1000 } })
   return ( 
     <animated.div
-        className="cancelButton"
+        className="cancelButton glow-red"
       style={{
         opacity: x.interpolate({ range: [0, 1], output: [1, 1] }),
         transform: x
