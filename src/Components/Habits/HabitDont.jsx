@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 
-const Habbit = (props) => {
+const HabitDont = (props) => {
     const [state, toggle] = useState(true);
     const { x } = useSpring({ from: { x: 0 }, x: state ? 1 : 0, config: { duration: 1000 } })
+    if (props.habit.type === 2) {
     return (
 <animated.div 
     onClick={() => {toggle(!state); props.onClick(props.habit.id, props.habit.completed)}}
@@ -26,6 +27,9 @@ const Habbit = (props) => {
         <span className="habit-days glow-green">{(props.habit.dayly > 1 && !props.habit.completed) ? 
             props.habit.dayly : null} </span>
     </animated.div>
-    );
+    ); }
+    else {
+      return null
+    }
 }
-export default Habbit;
+export default HabitDont;

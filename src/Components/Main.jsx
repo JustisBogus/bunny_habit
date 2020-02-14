@@ -10,7 +10,6 @@ class Main extends Component {
         super(props);
         this.state = { 
         };
-
     }
 
     toggleClick() {

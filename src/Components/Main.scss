@@ -25,16 +25,19 @@ $shadow-inner-focus: inset -6px -6px 26px 0 rgba(255,255,255,1),
     border-right: 2px solid #fff;
     border-top-left-radius: 100px;
     border-top-right-radius: 100px;
-    height: 100vh;
     padding: 0px 0 350px 0;
     margin: 100px 40px 0 40px;
     box-shadow: $shadow-outer;
 }
 
-.habitsContainer-title {
+.habitsContainer-title-first, .habitsContainer-title {
     font-size: 54px;
     font-weight: 700;
     color: #777;
+}
+
+.habitsContainer-title {
+    margin-top: 40px;
 }
 
 .habitsContainer-habitsContainer {
@@ -47,6 +50,14 @@ $shadow-inner-focus: inset -6px -6px 26px 0 rgba(255,255,255,1),
     flex-direction: row;
     justify-content: center;
     margin-bottom: 40px;
+}
+
+.habitsContainer-separator {
+    width: 80%;
+    height: 40px;
+    margin: auto;
+    border-bottom: 1px solid #fff;
+    text-align: center;
 }
 
 .newHabit-newHabitContainer {
@@ -107,9 +118,23 @@ $shadow-inner-focus: inset -6px -6px 26px 0 rgba(255,255,255,1),
     font-size: 24px;
     margin: 40px 5% 40px 5%;
     border-radius: 25px;
+    cursor: pointer;
     box-shadow: $shadow-outer;
     &:hover {
         box-shadow: $shadow-outer-hover;
+        color: #7bdf93;
+        text-align: center;
+        -webkit-animation: glowGreen 1s ease-in-out infinite alternate;
+        -moz-animation: glowGreen 1s ease-in-out infinite alternate;
+        animation: glowGreen 1s ease-in-out infinite alternate;
+    }
+    &:active {
+        box-shadow: $shadow-outer-hover;
+        color: #7bdf93;
+        text-align: center;
+        -webkit-animation: glowGreen 1s ease-in-out infinite alternate;
+        -moz-animation: glowGreen 1s ease-in-out infinite alternate;
+        animation: glowGreen 1s ease-in-out infinite alternate;
     }
 }
 
@@ -125,6 +150,7 @@ $shadow-inner-focus: inset -6px -6px 26px 0 rgba(255,255,255,1),
     font-size: 24px;
     margin: 40px 5% 40px 5%;
     border-radius: 25px;
+    cursor: pointer;
     box-shadow: $shadow-outer;
     &:hover {
         box-shadow: $shadow-outer-hover;
@@ -139,6 +165,7 @@ $shadow-inner-focus: inset -6px -6px 26px 0 rgba(255,255,255,1),
     margin: 40px 5% 0 5%;
     border-radius: 50px;
     color: #777;
+    cursor: pointer;
     box-shadow: $shadow-outer;
     &:hover {
         box-shadow: $shadow-outer-hover;

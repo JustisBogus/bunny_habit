@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import '../Main.scss';
 import './Calendar.scss';
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import goalSquare from './Visuals/goalSquare';
 import { connect } from 'react-redux';
 import { click } from '../../store/actions/habits';
 
@@ -11,14 +12,19 @@ class CalendarContainer extends Component {
         super(props);
         this.state = { 
         };
-
     }
 
     render() {
 
         return (
             <div className="calendarContainer">
-               <FullCalendar defaultView="dayGridMonth" plugins={[ dayGridPlugin ]} />
+               <FullCalendar 
+                    defaultView="dayGridMonth" 
+                    plugins={[ dayGridPlugin ]} 
+                    events={[
+                        { title: '★', date: '2020-02-01' },
+                        { title: '⌒(｡･.･｡)⌒', date: '2020-02-01' }
+                    ]}/>
             </div>
         );
     }

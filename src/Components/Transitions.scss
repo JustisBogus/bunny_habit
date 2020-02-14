@@ -16,34 +16,50 @@
   transition: opacity 500ms ease-out;
   }
 
-  .glow-green {
+.glow-green {
     text-align: center;
     -webkit-animation: glowGreen 1s ease-in-out infinite alternate;
     -moz-animation: glowGreen 1s ease-in-out infinite alternate;
     animation: glowGreen 1s ease-in-out infinite alternate;
-  }
+}
   
-  @keyframes glowGreen {
-    from {
-      text-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93;
-    }
-    to {
-      text-shadow: 0 0 1px #fff, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93;
-    }
+@keyframes glowGreen {
+  from {
+    text-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93;
   }
+  to {
+    text-shadow: 0 0 1px #fff, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93, 0 0 1px #7bdf93;
+  }
+}
 
-  .glow-red {
+.glow-red {
     text-align: center;
     -webkit-animation: glowRed 1s ease-in-out infinite alternate;
     -moz-animation: glowRed 1s ease-in-out infinite alternate;
     animation: glowRed 1s ease-in-out infinite alternate;
   }
   
-  @keyframes glowRed {
-    from {
-      text-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c;
-    }
-    to {
-      text-shadow: 0 0 1px #fff, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c;
-    }
+@keyframes glowRed {
+  from {
+    text-shadow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c;
   }
+  to {
+    text-shadow: 0 0 1px #fff, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c, 0 0 1px #e1306c;
+  }
+}
+
+.glow-white {
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+from {
+  box-shadow: 0 0 0px #fff, 0 0 0px #fff, 0 0 1px -1px #fff, 0 0 1px -1px #fff, 0 0 1px -1px #fff, 0 0 1px -1px #fff, 0 0 1px -1px #fff;
+}
+to {
+  box-shadow: 0 0 0px #fff, 0 0 1px -1px #fff, 0 0 1px -1px #fff, 0 0 1px -1px #fff, 0 0 1px -1px #fff, 0 0 1px -1px #fff, 0 0 1px -1px #fff;
+}
+}

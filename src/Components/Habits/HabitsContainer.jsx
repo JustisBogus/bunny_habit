@@ -3,7 +3,9 @@ import '../Main.scss';
 import '../Transitions.scss';
 import NewHabit from './NewHabit';
 import HabitButton from '../Buttons/HabitButton';
-import Habit from './Habit';
+import HabitDo from './HabitDo';
+import HabitDont from './HabitDont';
+import HabitGoals from './HabitGoals';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { click, setHabitCompleted, showNewHabit } from '../../store/actions/habits';
@@ -36,14 +38,30 @@ class HabitsContainer extends Component {
             newHabit = <NewHabit/>
         }
 
-        let habits = this.props.habits.map(habit => {
-            return <Habit
+        let habitsDo = this.props.habits.map(habit => {
+            return <HabitDo
                 key={habit.id}
                 habit={habit}
                 onClick={this.handleHabitClick}
             />
         });
-        
+
+        let habitsDont = this.props.habits.map(habit => {
+            return <HabitDont
+                key={habit.id}
+                habit={habit}
+                onClick={this.handleHabitClick}
+            />
+        });
+
+        let habitsGoals = this.props.habits.map(habit => {
+            return <HabitGoals
+                key={habit.id}
+                habit={habit}
+                onClick={this.handleHabitClick}
+            />
+        });
+
         let buttons = this.props.habitButtons.map(button => {
             return <HabitButton
                 key={button.id}
@@ -64,11 +82,23 @@ class HabitsContainer extends Component {
                     {newHabit}
                 </ReactCSSTransitionGroup>
                 <div className="habitsContainer-habitsContainer"> 
-                    <div className="habitsContainer-title">
-                        do
+                    <div className="habitsContainer-title-first">
+                        Do
                     </div>
-                    {habits}           
-                </div> 
+                    {habitsDo}
+                    <div className="habitsContainer-separator glow-white">
+                    </div>
+                    <div className="habitsContainer-title">
+                        Don't
+                    </div>
+                    {habitsDont}           
+                    </div>
+                    <div className="habitsContainer-separator glow-white">
+                    </div>
+                    <div className="habitsContainer-title">
+                        Goals
+                    </div>
+                    {habitsGoals} 
             </div>
         );
     }

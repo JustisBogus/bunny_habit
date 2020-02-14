@@ -16,7 +16,7 @@ const NewHabitButton = (props) =>  {
           })
           .interpolate(x => `scale(${x})`)
       }}>
-    <div onClick={() => toggle(!state)}>
+    <div onClick={() => {toggle(!state); props.onClick(props.button.id, props.button.value);}}>
       {props.button.text}
     </div>
     </animated.div>

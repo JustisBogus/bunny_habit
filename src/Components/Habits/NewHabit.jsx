@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import '../Main.scss';
 import NewHabitButton from '../Buttons/NewHabitButton';
 import CancelButton from '../Buttons/CancelButton';
+import { newHabitButtonFunctionDayly, newHabitButtonFunctionType } from './Functions/newHabitButtonFunctions';
 import { connect } from 'react-redux';
-import { click, newHabitInput, showNewHabitButtons, showNewHabit } from '../../store/actions/habits';
+import { click, newHabitInput, showNewHabitButtons, 
+    showNewHabit, hideNewHabit, increaseDays, 
+    changeHabitType, addNewHabit } from '../../store/actions/habits';
 
 class Habit extends Component {
 
@@ -17,8 +20,35 @@ class Habit extends Component {
         }
     }
 
+    handleNewHabitButtonClick = (id, value) => {
+        let newHabitButtons = [...this.props.newHabitButtons]
+        if (id === 1) {
+            const newValue = newHabitButtonFunctionDayly(value);
+            newHabitButtons[0].text = newValue.newText;
+            newHabitButtons[0].value = newValue.newValue;
+            this.props.onIncreaseDays(newValue, newHabitButtons);
+        }
+        if (id === 2) {
+            let newHabit = {
+                id: this.props.habits.length + 1,
+                habit: this.props.newHabit,
+                dayly: this.props.newHabitDayly,
+                type: this.props.newHabitType,
+                completed: false
+            }
+            this.props.onAddNewHabit(newHabit);
+            this.hideNewHabit();
+        }
+        if (id === 3) {
+            const newValue = newHabitButtonFunctionType(value);
+            newHabitButtons[2].text = newValue.newText;
+            newHabitButtons[2].value = newValue.newValue;
+            this.props.onChangeHabitType(newValue, newHabitButtons);
+        }
+    }
+
     hideNewHabit = () => {
-        this.props.onShowNewHabit(false);
+        this.props.onHideNewHabit(false);
     }
 
     render() {
@@ -30,6 +60,7 @@ class Habit extends Component {
             return <NewHabitButton
                 key={button.id}
                 button={button}
+                onClick={this.handleNewHabitButtonClick}
             />
         });
         } else {
@@ -38,8 +69,7 @@ class Habit extends Component {
             />
         }
 
-        return (
-           
+        return ( 
             <div className="newHabit-newHabitContainer">
                 <div className="newHabit-inputContainer">
                     <input 
@@ -60,9 +90,12 @@ class Habit extends Component {
 const mapStateToProps = state => {
     return {
         clicked: state.habits.clicked,
+        habits: state.habits.habits,
         newHabit: state.habits.newHabit,
+        newHabitDayly: state.habits.newHabitDayly,
+        newHabitType: state.habits.newHabitType,
         showNewHabitButtons: state.habits.showNewHabitButtons,
-        newHabitButtons: state.habits.newHabitButtons
+        newHabitButtons: state.habits.newHabitButtons,
     };
 };
 
@@ -71,7 +104,11 @@ const mapDispatchToProps = dispatch => {
         onButtonClicked: (buttonClicked) => dispatch(click(buttonClicked)),
         onNewHabitInput: (habitInput) => dispatch(newHabitInput(habitInput)),
         onShowNewHabitButtons: (showButtons) => dispatch(showNewHabitButtons(showButtons)),
-        onShowNewHabit: (showNewHabitInput) => dispatch(showNewHabit(showNewHabitInput))
+        onShowNewHabit: (showNewHabitInput) => dispatch(showNewHabit(showNewHabitInput)),
+        onHideNewHabit: (hideNewHabitInput) => dispatch(hideNewHabit(hideNewHabitInput)),
+        onIncreaseDays: (value, newHabitButtons) => dispatch(increaseDays(value, newHabitButtons)),
+        onChangeHabitType: (value, newHabitButtons) => dispatch(changeHabitType(value, newHabitButtons)),
+        onAddNewHabit: (newHabit) => dispatch(addNewHabit(newHabit))
     }
 }
 

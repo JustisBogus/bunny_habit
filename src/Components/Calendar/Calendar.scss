@@ -41,7 +41,6 @@ $shadow-inner-focus: inset -6px -6px 26px 0 rgba(255,255,255,1),
     top: 187px;
     text-align: center;
     font-size: 18px;
-    text-transform: lowercase;
     color: #777;
     opacity: 1;
 }
@@ -108,6 +107,9 @@ $shadow-inner-focus: inset -6px -6px 26px 0 rgba(255,255,255,1),
     background: #f2f2f2 !important;
     color: #7bdf93;
     border-color: #ddd !important;
+    -webkit-animation: glowGreen 1s ease-in-out infinite alternate;
+    -moz-animation: glowGreen 1s ease-in-out infinite alternate;
+    animation: glowGreen 1s ease-in-out infinite alternate;
 }
 
 .fc-head {
@@ -116,4 +118,14 @@ $shadow-inner-focus: inset -6px -6px 26px 0 rgba(255,255,255,1),
 
 .fc-day-grid {
     color: #777;
+}
+
+.fc-day-grid-event, .fc-h-event, .fc-event, .fc-start, .fc-end {
+    background: none;
+    color: #7bdf93;
+    border: none;
+    text-align: center;
+    -webkit-animation: glowGreen 1s ease-in-out infinite alternate;
+    -moz-animation: glowGreen 1s ease-in-out infinite alternate;
+    animation: glowGreen 1s ease-in-out infinite alternate;
 }

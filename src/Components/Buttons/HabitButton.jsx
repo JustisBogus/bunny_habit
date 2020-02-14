@@ -1,6 +1,6 @@
 import React, { useState }  from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarCheck, faTasks, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarCheck, faTasks, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useSpring, animated } from 'react-spring';
 
 const HabitButton = (props) =>  {
