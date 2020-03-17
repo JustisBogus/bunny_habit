@@ -3,7 +3,6 @@ import '../Main.scss';
 import './Calendar.scss';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import goalSquare from './Visuals/goalSquare';
 import { connect } from 'react-redux';
 import { click } from '../../store/actions/habits';
 

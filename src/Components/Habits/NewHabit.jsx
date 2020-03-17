@@ -8,6 +8,26 @@ import { click, newHabitInput, showNewHabitButtons,
     showNewHabit, hideNewHabit, increaseDays, 
     changeHabitType, addNewHabit } from '../../store/actions/habits';
 
+const mapStateToProps = state => {
+        return {
+            ...state.habits
+        };
+    };
+
+   
+const mapDispatchToProps = dispatch => {
+    return {
+        onButtonClicked: (buttonClicked) => dispatch(click(buttonClicked)),
+        onNewHabitInput: (habitInput) => dispatch(newHabitInput(habitInput)),
+        onShowNewHabitButtons: (showButtons) => dispatch(showNewHabitButtons(showButtons)),
+        onShowNewHabit: (showNewHabitInput) => dispatch(showNewHabit(showNewHabitInput)),
+        onHideNewHabit: (hideNewHabitInput) => dispatch(hideNewHabit(hideNewHabitInput)),
+        onIncreaseDays: (value, newHabitButtons) => dispatch(increaseDays(value, newHabitButtons)),
+        onChangeHabitType: (value, newHabitButtons) => dispatch(changeHabitType(value, newHabitButtons)),
+        onAddNewHabit: (newHabit) => dispatch(addNewHabit(newHabit))
+    }
+}
+
 class Habit extends Component {
 
     handleNewHabitInput = (habit) => {
@@ -84,31 +104,6 @@ class Habit extends Component {
                 </div>     
             </div>
         );
-    }
-}
-
-const mapStateToProps = state => {
-    return {
-        clicked: state.habits.clicked,
-        habits: state.habits.habits,
-        newHabit: state.habits.newHabit,
-        newHabitDayly: state.habits.newHabitDayly,
-        newHabitType: state.habits.newHabitType,
-        showNewHabitButtons: state.habits.showNewHabitButtons,
-        newHabitButtons: state.habits.newHabitButtons,
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onButtonClicked: (buttonClicked) => dispatch(click(buttonClicked)),
-        onNewHabitInput: (habitInput) => dispatch(newHabitInput(habitInput)),
-        onShowNewHabitButtons: (showButtons) => dispatch(showNewHabitButtons(showButtons)),
-        onShowNewHabit: (showNewHabitInput) => dispatch(showNewHabit(showNewHabitInput)),
-        onHideNewHabit: (hideNewHabitInput) => dispatch(hideNewHabit(hideNewHabitInput)),
-        onIncreaseDays: (value, newHabitButtons) => dispatch(increaseDays(value, newHabitButtons)),
-        onChangeHabitType: (value, newHabitButtons) => dispatch(changeHabitType(value, newHabitButtons)),
-        onAddNewHabit: (newHabit) => dispatch(addNewHabit(newHabit))
     }
 }
 

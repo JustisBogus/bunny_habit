@@ -10,6 +10,20 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { click, setHabitCompleted, showNewHabit } from '../../store/actions/habits';
 
+const mapStateToProps = state => {
+    return {
+        ...state.habits   
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onButtonClicked: (buttonClicked) => dispatch(click(buttonClicked)),
+        onSetHabitCompleted: (habit) => dispatch(setHabitCompleted(habit)),
+        onShowNewHabit: (showNewHabitInput) => dispatch(showNewHabit(showNewHabitInput))
+    }
+}
+
 class HabitsContainer extends Component {
     
     handleButtonClick = (id) => {
@@ -101,23 +115,6 @@ class HabitsContainer extends Component {
                     {habitsGoals} 
             </div>
         );
-    }
-}
-
-const mapStateToProps = state => {
-    return {
-        clicked: state.habits.clicked,
-        habits: state.habits.habits,
-        showNewHabit: state.habits.showNewHabit,
-        habitButtons: state.habits.habitButtons      
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onButtonClicked: (buttonClicked) => dispatch(click(buttonClicked)),
-        onSetHabitCompleted: (habit) => dispatch(setHabitCompleted(habit)),
-        onShowNewHabit: (showNewHabitInput) => dispatch(showNewHabit(showNewHabitInput))
     }
 }
 
