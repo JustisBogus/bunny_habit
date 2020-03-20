@@ -8,7 +8,7 @@ import HabitDont from './HabitDont';
 import HabitGoals from './HabitGoals';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
-import { click, setHabitCompleted, showNewHabit } from '../../store/actions/habits';
+import { click, setHabitCompleted, showNewHabit, habitsListFetch } from '../../store/actions/habits';
 
 const mapStateToProps = state => {
     return {
@@ -20,11 +20,16 @@ const mapDispatchToProps = dispatch => {
     return {
         onButtonClicked: (buttonClicked) => dispatch(click(buttonClicked)),
         onSetHabitCompleted: (habit) => dispatch(setHabitCompleted(habit)),
-        onShowNewHabit: (showNewHabitInput) => dispatch(showNewHabit(showNewHabitInput))
+        onShowNewHabit: (showNewHabitInput) => dispatch(showNewHabit(showNewHabitInput)),
+        onHabitsListFetch: () => dispatch(habitsListFetch())
     }
 }
 
 class HabitsContainer extends Component {
+
+    componentDidMount() {
+        this.props.onHabitsListFetch();
+    }
     
     handleButtonClick = (id) => {
         if (id === 3) {   
@@ -46,35 +51,43 @@ class HabitsContainer extends Component {
 
     render() {
 
+        const { isFetching } = this.props; 
+
         let newHabit;
 
         if (this.props.showNewHabit) {
             newHabit = <NewHabit/>
         }
 
-        let habitsDo = this.props.habits.map(habit => {
-            return <HabitDo
-                key={habit.id}
-                habit={habit}
-                onClick={this.handleHabitClick}
-            />
-        });
+        let habitsDo = this.props.habits
+            .sort((a, b) => a.id < b.id)
+            .map(habit => {
+                return <HabitDo
+                    key={habit.id}
+                    habit={habit}
+                    onClick={this.handleHabitClick}
+                />
+            });
 
-        let habitsDont = this.props.habits.map(habit => {
-            return <HabitDont
-                key={habit.id}
-                habit={habit}
-                onClick={this.handleHabitClick}
-            />
-        });
+        let habitsDont = this.props.habits
+            .sort((a, b) => a.id < b.id)
+            .map(habit => {
+                return <HabitDont
+                    key={habit.id}
+                    habit={habit}
+                    onClick={this.handleHabitClick}
+                />
+            });
 
-        let habitsGoals = this.props.habits.map(habit => {
-            return <HabitGoals
-                key={habit.id}
-                habit={habit}
-                onClick={this.handleHabitClick}
-            />
-        });
+        let habitsGoals = this.props.habits
+            .sort((a, b) => a.id < b.id)
+            .map(habit => {
+                return <HabitGoals
+                    key={habit.id}
+                    habit={habit}
+                    onClick={this.handleHabitClick}
+                />
+            });
 
         let buttons = this.props.habitButtons.map(button => {
             return <HabitButton
@@ -83,6 +96,10 @@ class HabitsContainer extends Component {
                 onClick={this.handleButtonClick}
             />
             });
+
+        let loader = (
+            <div className="lds-ripple"><div></div><div></div></div>
+            );
 
         return (
             <div className="habitsContainer">
@@ -99,20 +116,20 @@ class HabitsContainer extends Component {
                     <div className="habitsContainer-title-first">
                         Do
                     </div>
-                    {habitsDo}
+                    { isFetching ? loader : habitsDo }
                     <div className="habitsContainer-separator glow-white">
                     </div>
                     <div className="habitsContainer-title">
                         Don't
                     </div>
-                    {habitsDont}           
+                    { isFetching ? loader : habitsDont}           
                     </div>
                     <div className="habitsContainer-separator glow-white">
                     </div>
                     <div className="habitsContainer-title">
                         Goals
                     </div>
-                    {habitsGoals} 
+                    { isFetching ? loader : habitsGoals} 
             </div>
         );
     }

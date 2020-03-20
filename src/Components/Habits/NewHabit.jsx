@@ -54,6 +54,9 @@ class Habit extends Component {
                 habit: this.props.newHabit,
                 dayly: this.props.newHabitDayly,
                 type: this.props.newHabitType,
+                comment: '',
+                created_date: '2020-03-19 12:00:00',
+                modified_date: '2020-03-19 12:00:00',
                 completed: false
             }
             this.props.onAddNewHabit(newHabit);
