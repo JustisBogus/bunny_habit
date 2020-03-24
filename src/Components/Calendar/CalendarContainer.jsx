@@ -4,7 +4,19 @@ import './Calendar.scss';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { connect } from 'react-redux';
-import { click } from '../../store/actions/habits';
+import { completedHabitsListFetch } from '../../store/actions/habits';
+
+const mapStateToProps = state => {
+    return {
+        ...state.habits   
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onCompletedHabitsListFetch: () => dispatch(completedHabitsListFetch())
+    }
+}
 
 class CalendarContainer extends Component {
     constructor(props) {
@@ -13,31 +25,23 @@ class CalendarContainer extends Component {
         };
     }
 
+    componentDidMount() {
+        this.props.onCompletedHabitsListFetch();
+        console.log(this.props.compledHabits);
+    }
+
     render() {
+
+        const { completedHabits } = this.props;
 
         return (
             <div className="calendarContainer">
                <FullCalendar 
                     defaultView="dayGridMonth" 
                     plugins={[ dayGridPlugin ]} 
-                    events={[
-                        { title: '★', date: '2020-02-01' },
-                        { title: '⌒(｡･.･｡)⌒', date: '2020-02-01' }
-                    ]}/>
+                    events={completedHabits}/>
             </div>
         );
-    }
-}
-
-const mapStateToProps = state => {
-    return {
-        clicked: state.habits.clicked
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onButtonClicked: (buttonClicked) => dispatch(click(buttonClicked))
     }
 }
 

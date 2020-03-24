@@ -1,6 +1,7 @@
-import { CLICK, HABITS_LIST_RECEIVED, HABITS_LIST_ERROR, SHOW_NEW_HABIT, 
-    HIDE_NEW_HABIT, ADD_NEW_HABIT_INPUT, SHOW_NEW_HABIT_BUTTONS, 
-    SET_HABIT_COMPLETED, INCREASE_DAYS, CHANGE_HABIT_TYPE, CREATE_NEW_HABIT, HABITS_LIST_REQUEST 
+import { CLICK, HABITS_LIST_REQUEST, HABITS_LIST_RECEIVED, HABITS_LIST_ERROR, 
+            COMPLETED_HABITS_LIST_REQUEST, COMPLETED_HABITS_LIST_RECEIVED, COMPLETED_HABITS_LIST_ERROR,
+            SHOW_NEW_HABIT, HIDE_NEW_HABIT, ADD_NEW_HABIT_INPUT, SHOW_NEW_HABIT_BUTTONS, 
+            SET_HABIT_COMPLETED, INCREASE_DAYS, CHANGE_HABIT_TYPE, CREATE_NEW_HABIT,
     } from './actionTypes';
 import { requests } from '../../agent';
 
@@ -34,6 +35,29 @@ export const habitsListFetch = () => {
     }
 };
 
+export const completedHabitsListRequest = () => ({
+    type: COMPLETED_HABITS_LIST_REQUEST,
+});
+
+export const completedHabitsListError = (error) => ({
+    type: COMPLETED_HABITS_LIST_ERROR,
+    error
+});
+
+export const completedHabitsListReceived = (data) => ({
+    type: COMPLETED_HABITS_LIST_RECEIVED,
+    data
+});
+
+export const completedHabitsListFetch = (page = 1) => {
+    return (dispatch) => {
+        dispatch(completedHabitsListRequest());
+        return requests.get(`/completed?page=${page}`)
+            .then(response => dispatch(completedHabitsListReceived(response.data)))
+            .catch(error => dispatch(completedHabitsListError(error)));
+    }
+};
+
 export const newHabitInput = (newHabit) => {
     return {
         type: ADD_NEW_HABIT_INPUT,
@@ -62,10 +86,28 @@ export const hideNewHabit = (hideNewHabitInput) => {
     };
 };
 
-export const setHabitCompleted = (habit) => {
+export const addNewCompletedHabit = (newCompletedHabit, updatedHabits) => {
+    return (dispatch) => {
+        return requests.post('/completed/add', {
+            id: newCompletedHabit.id,
+            habit: newCompletedHabit.habit,
+            title: newCompletedHabit.title,
+            comment: newCompletedHabit.comment,
+            date: newCompletedHabit.date,
+            type: newCompletedHabit.type,
+            successive: newCompletedHabit.successive
+        })
+        .then(dispatch(setHabitCompleted(updatedHabits)))
+        .catch(error => {
+            console.log(error)
+        })
+    }
+}
+
+export const setHabitCompleted = (updatedHabits) => {
     return {
         type: SET_HABIT_COMPLETED,
-        habit
+        updatedHabits
     };
 };
 

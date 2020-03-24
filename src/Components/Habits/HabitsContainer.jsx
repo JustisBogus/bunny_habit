@@ -8,7 +8,7 @@ import HabitDont from './HabitDont';
 import HabitGoals from './HabitGoals';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
-import { click, setHabitCompleted, showNewHabit, habitsListFetch } from '../../store/actions/habits';
+import { click, setHabitCompleted, showNewHabit, habitsListFetch, addNewCompletedHabit } from '../../store/actions/habits';
 
 const mapStateToProps = state => {
     return {
@@ -21,7 +21,8 @@ const mapDispatchToProps = dispatch => {
         onButtonClicked: (buttonClicked) => dispatch(click(buttonClicked)),
         onSetHabitCompleted: (habit) => dispatch(setHabitCompleted(habit)),
         onShowNewHabit: (showNewHabitInput) => dispatch(showNewHabit(showNewHabitInput)),
-        onHabitsListFetch: () => dispatch(habitsListFetch())
+        onHabitsListFetch: () => dispatch(habitsListFetch()),
+        onAddNewCompletedHabit: (newCompletedHabit, updatedHabits) => dispatch(addNewCompletedHabit(newCompletedHabit, updatedHabits))
     }
 }
 
@@ -34,16 +35,28 @@ class HabitsContainer extends Component {
     handleButtonClick = (id) => {
         if (id === 3) {   
             this.props.onShowNewHabit(true);
-        } 
+        }
     }
 
     handleHabitClick = (id, completed) => {
-        let habits = [...this.props.habits]
+        let updatedHabits = [...this.props.habits]
+        //const completed = true;
+        //const completedHabit = habits.map(habit => (habit.id === id ? {...habit, completed} : habit));
+        //console.log(completedHabit);
         if(!completed) {
-            for (var i=0; i < habits.length; i++) {
-                if (habits[i].id===id) {
-                    habits[i].completed = true;
-                    this.props.onSetHabitCompleted(habits);
+           for (var i=0; i < updatedHabits.length; i++) {
+             if (updatedHabits[i].id===id) {
+                    updatedHabits[i].completed = true;
+                    const newCompletedHabit = {
+                        id: updatedHabits[i].id,
+                        habit: updatedHabits[i].habit,
+                        title: "⌒(｡･.･｡)⌒",
+                        comment: updatedHabits[i].comment,
+                        date: new Date(),
+                        type: updatedHabits[i].type,
+                        successive: 1
+                    }
+                    this.props.onAddNewCompletedHabit(newCompletedHabit, updatedHabits);
                 }
             }
         }
@@ -51,7 +64,7 @@ class HabitsContainer extends Component {
 
     render() {
 
-        const { isFetching } = this.props; 
+        const { isFetching, habits } = this.props; 
 
         let newHabit;
 
@@ -59,7 +72,7 @@ class HabitsContainer extends Component {
             newHabit = <NewHabit/>
         }
 
-        let habitsDo = this.props.habits
+        let habitsDo = habits
             .sort((a, b) => a.id < b.id)
             .map(habit => {
                 return <HabitDo
@@ -69,7 +82,7 @@ class HabitsContainer extends Component {
                 />
             });
 
-        let habitsDont = this.props.habits
+        let habitsDont = habits
             .sort((a, b) => a.id < b.id)
             .map(habit => {
                 return <HabitDont
@@ -79,7 +92,7 @@ class HabitsContainer extends Component {
                 />
             });
 
-        let habitsGoals = this.props.habits
+        let habitsGoals = habits
             .sort((a, b) => a.id < b.id)
             .map(habit => {
                 return <HabitGoals

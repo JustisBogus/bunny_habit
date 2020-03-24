@@ -6,7 +6,9 @@ import habitButtonData from './habitButtonData';
 const initialState = {
     clicked: false,
     habits: habitData,
+    completedHabits: null,
     isFetching: false,
+    isFetchingCompleted: false,
     showNewHabit: false,
     newHabit: "",
     newHabitDayly: 1,
@@ -40,6 +42,23 @@ const reducer = (state = initialState, action) => {
                     isFetching: false,
                     habits: null
             };
+        case actionTypes.COMPLETED_HABITS_LIST_REQUEST:
+            return {
+                ...state,
+                    isFetchingCompleted: true,
+            };
+        case actionTypes.COMPLETED_HABITS_LIST_RECEIVED:
+            return {
+                ...state,
+                    completedHabits: action.data,
+                    isFetching: false
+            };
+        case actionTypes.COMPLETED_HABITS_LIST_ERROR:
+            return {
+                ...state,
+                    isFetchingCompleted: false,
+                    completedHabits: null
+            };
         case actionTypes.ADD_NEW_HABIT_INPUT:
             return {
                 ...state,
@@ -64,7 +83,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.SET_HABIT_COMPLETED:
             return {
                 ...state,
-                    habits: action.habit
+                    habits: action.updatedHabits
             };
         case actionTypes.INCREASE_DAYS:
             return {

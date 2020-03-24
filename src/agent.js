@@ -10,6 +10,6 @@ export const requests = {
         return superagent.get(`${API_ROOT}${url}`).then(responseBody);
     },
     post: (url, body = null) => {
-        return superagent.post(`${API_ROOT}${url}`, body).then(responseBody).then(console.log(body));
+        return superagent.post(`${API_ROOT}${url}`, body).then(responseBody);
     }
 };
