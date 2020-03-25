@@ -19,27 +19,30 @@ const mapDispatchToProps = dispatch => {
 }
 
 class CalendarContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-        };
-    }
 
     componentDidMount() {
         this.props.onCompletedHabitsListFetch();
-        console.log(this.props.compledHabits);
     }
 
     render() {
 
-        const { completedHabits } = this.props;
+        const { isFetchingCompleted, completedHabits } = this.props;
+        const loader = <div className="calendar-loaderContainer"><div className="lds-ripple"><div></div><div></div></div></div>;
+
+        let content;
+
+        if (isFetchingCompleted) {
+            content = loader
+        } else {
+            content = <FullCalendar 
+            defaultView="dayGridMonth" 
+            plugins={[ dayGridPlugin ]} 
+            events={completedHabits}/>
+        }
 
         return (
             <div className="calendarContainer">
-               <FullCalendar 
-                    defaultView="dayGridMonth" 
-                    plugins={[ dayGridPlugin ]} 
-                    events={completedHabits}/>
+               {content}
             </div>
         );
     }

@@ -57,6 +57,7 @@ class HabitsContainer extends Component {
                         successive: 1
                     }
                     this.props.onAddNewCompletedHabit(newCompletedHabit, updatedHabits);
+                    console.log(this.props.habits);
                 }
             }
         }
@@ -110,7 +111,7 @@ class HabitsContainer extends Component {
             />
             });
 
-        let loader = (
+        const loader = (
             <div className="lds-ripple"><div></div><div></div></div>
             );
 

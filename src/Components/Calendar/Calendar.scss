@@ -133,3 +133,7 @@ $shadow-inner-focus: inset -6px -6px 26px 0 rgba(255,255,255,1),
     -moz-animation: glowGreen 1s ease-in-out infinite alternate;
     animation: glowGreen 1s ease-in-out infinite alternate;
 }
+
+.calendar-loaderContainer {
+    margin-top: 40px;
+}

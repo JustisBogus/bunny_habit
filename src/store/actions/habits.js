@@ -2,6 +2,7 @@ import { CLICK, HABITS_LIST_REQUEST, HABITS_LIST_RECEIVED, HABITS_LIST_ERROR,
             COMPLETED_HABITS_LIST_REQUEST, COMPLETED_HABITS_LIST_RECEIVED, COMPLETED_HABITS_LIST_ERROR,
             SHOW_NEW_HABIT, HIDE_NEW_HABIT, ADD_NEW_HABIT_INPUT, SHOW_NEW_HABIT_BUTTONS, 
             SET_HABIT_COMPLETED, INCREASE_DAYS, CHANGE_HABIT_TYPE, CREATE_NEW_HABIT,
+            CREATE_NEW_COMPLETED_HABIT
     } from './actionTypes';
 import { requests } from '../../agent';
 
@@ -98,10 +99,28 @@ export const addNewCompletedHabit = (newCompletedHabit, updatedHabits) => {
             successive: newCompletedHabit.successive
         })
         .then(dispatch(setHabitCompleted(updatedHabits)))
+        .then(dispatch(createNewCompletedHabit(newCompletedHabit)))
+        .then(dispatch(updateHabitCompleted(newCompletedHabit.id)))
         .catch(error => {
             console.log(error)
         })
     }
+}
+
+export const createNewCompletedHabit = (newCompletedHabit) => {
+    return {
+        type: CREATE_NEW_COMPLETED_HABIT,
+        newCompletedHabit
+    }
+}
+
+export const updateHabitCompleted = (id) => {
+    return () => {
+        return requests.put(`/habit/update/${id}`, {
+            completed: true,
+        });
+    }
+    
 }
 
 export const setHabitCompleted = (updatedHabits) => {

@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                     completedHabits: action.data,
-                    isFetching: false
+                    isFetchingCompleted: false
             };
         case actionTypes.COMPLETED_HABITS_LIST_ERROR:
             return {
@@ -101,6 +101,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                     habits: [action.newHabit].concat(state.habits)
+                };
+        case actionTypes.CREATE_NEW_COMPLETED_HABIT:
+            return {
+                ...state,
+                    completedHabits: [action.newCompletedHabit].concat(state.completedHabits)
                 };
         default: 
             return state;
