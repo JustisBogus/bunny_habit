@@ -30,6 +30,7 @@ class HabitsContainer extends Component {
 
     componentDidMount() {
         this.props.onHabitsListFetch();
+       // this.interval = setInterval(() => this.setState({ time: Date.now() }), 3600000);
     }
     
     handleButtonClick = (id) => {
@@ -39,29 +40,24 @@ class HabitsContainer extends Component {
     }
 
     handleHabitClick = (id, completed) => {
-        let updatedHabits = [...this.props.habits]
-        //const completed = true;
-        //const completedHabit = habits.map(habit => (habit.id === id ? {...habit, completed} : habit));
-        //console.log(completedHabit);
+        //const date = new Date(this.props.habits[1].createdDate).getDate();
+        let habits = [...this.props.habits]
         if(!completed) {
-           for (var i=0; i < updatedHabits.length; i++) {
-             if (updatedHabits[i].id===id) {
-                    updatedHabits[i].completed = true;
-                    const newCompletedHabit = {
-                        id: updatedHabits[i].id,
-                        habit: updatedHabits[i].habit,
-                        title: "⌒(｡･.･｡)⌒",
-                        comment: updatedHabits[i].comment,
-                        date: new Date(),
-                        type: updatedHabits[i].type,
-                        successive: 1
-                    }
-                    this.props.onAddNewCompletedHabit(newCompletedHabit, updatedHabits);
-                    console.log(this.props.habits);
-                }
+            const updatedHabit = habits.find(habit => habit.id === id);
+            updatedHabit.completed = true;
+            const newCompletedHabit = {
+                id: updatedHabit.id,
+                habit: updatedHabit.habit,
+                title: "⌒(｡･.･｡)⌒",
+                comment: updatedHabit.comment,
+                date: new Date(),
+                type: updatedHabit.type,
+                successive: 1
             }
+            this.props.onAddNewCompletedHabit(newCompletedHabit, habits);
         }
     }
+    
 
     render() {
 
