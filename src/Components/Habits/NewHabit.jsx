@@ -55,8 +55,8 @@ class Habit extends Component {
                 dayly: this.props.newHabitDayly,
                 type: this.props.newHabitType,
                 comment: '',
-                created_date: '2020-03-19 12:00:00',
-                modified_date: '2020-03-19 12:00:00',
+                created_date: new Date(),
+                modified_date: new Date(),
                 completed: false
             }
             this.props.onAddNewHabit(newHabit);

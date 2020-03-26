@@ -97,6 +97,11 @@ const reducer = (state = initialState, action) => {
                     newHabitType: action.value.newValue,
                     newHabitButtons: action.newHabitButtons
                 };
+        case actionTypes.RESET_HABIT:
+            return {
+                ...state,
+                    habits: action.habits
+            };
         case actionTypes.CREATE_NEW_HABIT:
             return {
                 ...state,

@@ -1,7 +1,7 @@
 import { CLICK, HABITS_LIST_REQUEST, HABITS_LIST_RECEIVED, HABITS_LIST_ERROR, 
             COMPLETED_HABITS_LIST_REQUEST, COMPLETED_HABITS_LIST_RECEIVED, COMPLETED_HABITS_LIST_ERROR,
             SHOW_NEW_HABIT, HIDE_NEW_HABIT, ADD_NEW_HABIT_INPUT, SHOW_NEW_HABIT_BUTTONS, 
-            SET_HABIT_COMPLETED, INCREASE_DAYS, CHANGE_HABIT_TYPE, CREATE_NEW_HABIT,
+            SET_HABIT_COMPLETED, INCREASE_DAYS, CHANGE_HABIT_TYPE, RESET_HABIT, CREATE_NEW_HABIT,
             CREATE_NEW_COMPLETED_HABIT
     } from './actionTypes';
 import { requests } from '../../agent';
@@ -26,6 +26,27 @@ export const habitsListReceived = (data) => ({
     type: HABITS_LIST_RECEIVED,
     data
 });
+
+/*
+export const filterOldHabits = (response) => {
+        const olderHabits = response.filter(
+            habit => {
+                return new Date(habit.modifiedDate).getDate() < new Date().getDate()
+        });
+    return resetOldHabits(olderHabits);
+}
+
+export const resetOldHabits = (habits) => {
+    return (dispatch) => {
+        for (let i=0; i<habits.length; i++) {
+            requests.put(`/habit/update/${habits[i].id}`, {
+                completed: false,
+                modified_date: new Date()
+            })
+        };
+    };
+}
+*/
 
 export const habitsListFetch = () => {
     return (dispatch) => {
@@ -118,6 +139,7 @@ export const updateHabitCompleted = (id) => {
     return () => {
         return requests.put(`/habit/update/${id}`, {
             completed: true,
+            modified_date: new Date()
         });
     }
     
@@ -145,6 +167,24 @@ export const changeHabitType = (value, newHabitButtons) => {
         newHabitButtons
     };
 };
+
+export const resetHabits = (habits) => {
+    return (dispatch) => {
+        for (let i=0; i<habits.length; i++) {
+            requests.put(`/habit/update/${habits[i].id}`, {
+                completed: false,
+                modified_date: new Date()
+            })
+        };
+    };
+}
+
+export const resetHabit = (habits) => {
+    return {
+        type: RESET_HABIT,
+        habits    
+    };
+}
 
 export const addNewHabit = (newHabit) => {
         return (dispatch) => {

@@ -8,7 +8,8 @@ import HabitDont from './HabitDont';
 import HabitGoals from './HabitGoals';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
-import { click, setHabitCompleted, showNewHabit, habitsListFetch, addNewCompletedHabit } from '../../store/actions/habits';
+import { click, setHabitCompleted, showNewHabit, habitsListFetch, addNewCompletedHabit,
+     resetHabits, resetHabit } from '../../store/actions/habits';
 
 const mapStateToProps = state => {
     return {
@@ -22,7 +23,9 @@ const mapDispatchToProps = dispatch => {
         onSetHabitCompleted: (habit) => dispatch(setHabitCompleted(habit)),
         onShowNewHabit: (showNewHabitInput) => dispatch(showNewHabit(showNewHabitInput)),
         onHabitsListFetch: () => dispatch(habitsListFetch()),
-        onAddNewCompletedHabit: (newCompletedHabit, updatedHabits) => dispatch(addNewCompletedHabit(newCompletedHabit, updatedHabits))
+        onAddNewCompletedHabit: (newCompletedHabit, updatedHabits) => dispatch(addNewCompletedHabit(newCompletedHabit, updatedHabits)),
+        onResetHabits: (habits) => dispatch(resetHabits(habits)),
+        onResetHabit: (habits) => dispatch(resetHabit(habits)),
     }
 }
 
@@ -30,17 +33,38 @@ class HabitsContainer extends Component {
 
     componentDidMount() {
         this.props.onHabitsListFetch();
-       // this.interval = setInterval(() => this.setState({ time: Date.now() }), 3600000);
+        this.interval = setInterval(() => {
+            let date = new Date();
+            if (date.getHours() === 0 && date.getMinutes() === 0) {
+                this.props.onResetHabits(this.props.habits);
+            }
+        }, 60000);
     }
     
     handleButtonClick = (id) => {
         if (id === 3) {   
             this.props.onShowNewHabit(true);
         }
+        if (id === 2) {
+            const { habits } = this.props;
+            for (let i=0; i<habits.length; i++) {
+                habits[i].completed = false;
+                habits[i].dateModified = new Date()
+            }
+            this.props.onResetHabit(habits);
+            this.props.onResetHabits(habits);
+        }
+        if (id === 1) {
+            const day = new Date().getDate();
+            const { habits } = this.props;
+            const olderHabits = habits.filter(habit => new Date(habit.modifiedDate).getDate() < day);
+            console.log(day);
+            console.log(habits);
+            console.log(olderHabits);
+        }
     }
 
     handleHabitClick = (id, completed) => {
-        //const date = new Date(this.props.habits[1].createdDate).getDate();
         let habits = [...this.props.habits]
         if(!completed) {
             const updatedHabit = habits.find(habit => habit.id === id);
