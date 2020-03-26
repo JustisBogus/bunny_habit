@@ -82,7 +82,6 @@ class HabitsContainer extends Component {
         }
     }
     
-
     render() {
 
         const { isFetching, habits } = this.props; 
