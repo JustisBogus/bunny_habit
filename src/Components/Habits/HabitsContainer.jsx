@@ -57,7 +57,10 @@ class HabitsContainer extends Component {
         if (id === 1) {
             const day = new Date().getDate();
             const { habits } = this.props;
-            const olderHabits = habits.filter(habit => new Date(habit.modifiedDate).getDate() < day);
+            const olderHabits = habits.filter(habit => {
+               return (new Date(habit.modifiedDate).getDate() < day)
+            });
+
             console.log(day);
             console.log(habits);
             console.log(olderHabits);
