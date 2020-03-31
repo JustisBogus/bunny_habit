@@ -5,18 +5,18 @@ const superagent = superagentPromise(_superagent, global.Promise);
 const API_ROOT = 'https://localhost:8000';
 const responseBody = response => response.body;
 
-let token = null;
+let token = window.localStorage.getItem('jwtToken');
 
 const tokenPlugin = secured => {
     return (request) => {
         if (token && secured) {
-            request.set('Authorisation', `Bearer ${token}`);
+            request.set('Authorization', `Bearer ${token}`);
         }
     };
 };
 
 export const requests = {
-    get: (url, secured = false) => {
+    get: (url, secured = true) => {
         return superagent.get(`${API_ROOT}${url}`).use(tokenPlugin(secured)).then(responseBody);
     },
     post: (url, body = null, secured = true) => {
@@ -25,5 +25,5 @@ export const requests = {
     put: (url, body = null, secured = true) => {
         return superagent.put(`${API_ROOT}${url}`, body).use(tokenPlugin(secured)).then(responseBody);
     },
-    setToken: (newJwtToken) => token = newJwtToken
+    setToken: (newJwtToken) => token = newJwtToken,
 };

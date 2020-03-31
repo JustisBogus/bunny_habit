@@ -2,7 +2,8 @@ import { USER_LOGIN_SUCCESS } from "../actions/actionTypes";
 
 export default (state = {
     token: null,
-    userId: null
+    userId: null,
+    isAuthenticated: false
 }, action) => {
     switch (action.type) {
         case USER_LOGIN_SUCCESS:
@@ -10,7 +11,8 @@ export default (state = {
             return {
                 ...state,
                 token: action.token,
-                userId: action.userId
+                userId: action.userId,
+                isAuthenticated: true
             };
         default:
             return state;

@@ -51,7 +51,7 @@ export const resetOldHabits = (habits) => {
 export const habitsListFetch = () => {
     return (dispatch) => {
         dispatch(habitsListRequest());
-        return requests.get('/')
+        return requests.get(`/`)
             .then(response => dispatch(habitsListReceived(response)))
             .catch(error => dispatch(habitsListError(error)));
     }
