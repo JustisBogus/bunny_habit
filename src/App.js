@@ -4,14 +4,15 @@ import LoginForm from './Components/Login/LoginForm';
 import './App.css';
 import { requests } from './agent';
 import { connect } from 'react-redux';
-import { userProfileFetch } from './store/actions/auth';
+import { userProfileFetch, userSetId, userProfileError } from './store/actions/auth';
 
 const mapStateToProps = state => ({
   ...state.auth
 });
 
 const mapDispatchToProps = {
-  userProfileFetch
+  userProfileFetch,
+  userSetId
 }
 
 class App extends React.Component {
@@ -24,10 +25,19 @@ class App extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { userId } = this.props
+  componentDidMount() {
+    const userId = window.localStorage.getItem('userId');
+    const { userSetId } = this.props;
 
-    if (prevProps.userId !== userId && userId !== null) {
+    if (userId) {
+      //userSetId(userId);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { userId, userData, userProfileFetch } = this.props
+
+    if (prevProps.userId !== userId && userId !== null && userData === null) {
       //userProfileFetch(userId);
     }
   }
@@ -35,12 +45,12 @@ class App extends React.Component {
   render () {
 
     let content;
-    let { isAthenticated } = this.props;
+    let { isAuthenticated, userData } = this.props;
 
-    if (isAthenticated) {
+    if (!isAuthenticated) {
       content = <LoginForm/>
     }
-    if (!isAthenticated) {
+    if (isAuthenticated) {
       content = <Main/>
     }
 
