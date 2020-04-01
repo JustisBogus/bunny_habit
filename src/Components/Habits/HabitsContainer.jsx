@@ -32,6 +32,7 @@ const mapDispatchToProps = dispatch => {
 class HabitsContainer extends Component {
 
     componentDidMount() {
+        console.log(window.localStorage.getItem('jwtToken'));
         this.props.onHabitsListFetch();
         this.interval = setInterval(() => {
             let date = new Date();
@@ -94,7 +95,9 @@ class HabitsContainer extends Component {
         if (this.props.showNewHabit) {
             newHabit = <NewHabit/>
         }
-
+        if (!isFetching) {
+            console.log(habits)
+        }
         let habitsDo = habits
             .sort((a, b) => a.id < b.id)
             .map(habit => {

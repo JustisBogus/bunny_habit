@@ -46,6 +46,7 @@ class App extends React.Component {
 
     let content;
     let { isAuthenticated, userData } = this.props;
+    let token = window.localStorage.getItem('jwtToken');
 
     if (!isAuthenticated) {
       content = <LoginForm/>
