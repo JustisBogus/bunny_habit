@@ -22,6 +22,9 @@ class CalendarContainer extends Component {
 
     componentDidMount() {
         this.props.onCompletedHabitsListFetch();
+        if (!this.props.isFetchingCompleted) {
+            console.log(this.props.completedHabits);
+        }
     }
 
     render() {

@@ -61,7 +61,6 @@ class HabitsContainer extends Component {
             const olderHabits = habits.filter(habit => {
                return (new Date(habit.modifiedDate).getDate() < day)
             });
-
             console.log(day);
             console.log(habits);
             console.log(olderHabits);
@@ -95,10 +94,13 @@ class HabitsContainer extends Component {
         if (this.props.showNewHabit) {
             newHabit = <NewHabit/>
         }
-        if (!isFetching) {
-            console.log(habits)
-        }
-        let habitsDo = habits
+       
+        let habitsDo;
+        let habitsDont;
+        let habitsGoals;
+        
+        if (habits){
+            habitsDo = habits
             .sort((a, b) => a.id < b.id)
             .map(habit => {
                 return <HabitDo
@@ -108,7 +110,7 @@ class HabitsContainer extends Component {
                 />
             });
 
-        let habitsDont = habits
+            habitsDont = habits
             .sort((a, b) => a.id < b.id)
             .map(habit => {
                 return <HabitDont
@@ -118,7 +120,7 @@ class HabitsContainer extends Component {
                 />
             });
 
-        let habitsGoals = habits
+            habitsGoals = habits
             .sort((a, b) => a.id < b.id)
             .map(habit => {
                 return <HabitGoals
@@ -127,7 +129,14 @@ class HabitsContainer extends Component {
                     onClick={this.handleHabitClick}
                 />
             });
+        }
 
+        if (!habits) {
+            habitsDo = <div>Start creating new habits</div>
+            habitsDont = <div>Start creating new habits</div>
+            habitsGoals = <div>Start creating new habits</div>
+        }
+       
         let buttons = this.props.habitButtons.map(button => {
             return <HabitButton
                 key={button.id}

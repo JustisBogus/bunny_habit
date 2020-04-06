@@ -40,7 +40,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                     isFetching: false,
-                    habits: null
+                    habits: habitData
             };
         case actionTypes.COMPLETED_HABITS_LIST_REQUEST:
             return {
